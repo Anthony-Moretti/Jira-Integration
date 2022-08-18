@@ -1,0 +1,40 @@
+{
+  "name": "Anthony's Bugsnag for Jira",
+  "description": "Connects Bugsnag to Jira",
+  "key": "bugsnag-jira-anthony",
+  "scopes": [
+    "write"
+  ],
+  "baseUrl": "https://6bcc-82-37-129-10.eu.ngrok.io",
+  "vendor": {
+    "name": "SmartBear",
+    "url": "https://smartbear.com/"
+  },
+  "lifecycle": {
+    "installed": "/services/jira/app/installed",
+    "uninstalled": "/services/jira/app/uninstalled"
+  },
+  "authentication": {
+    "type": "jwt"
+  },
+  "apiVersion": 1,
+  "modules": {
+    "postInstallPage": {
+      "url": "/external_integrations/jira/configure",
+      "name": {"value": "Configure Bugsnag App"},
+      "key": "post-install-bugsnag"
+    },
+    "configurePage": {
+      "url": "/external_integrations/jira/configure",
+      "name": {"value": "Configure Bugsnag App"},
+      "key": "configure-bugsnag"
+    },
+    "webhooks": [
+      {
+        "event": "jira:issue_updated",
+        "url": "/services/jira/app/webhook?project_key={project.key}",
+        "excludeBody": false
+      }
+    ]
+  }
+}
